@@ -22,4 +22,4 @@ spring:
 
 # --- JWT Secret Key ---
 jwt:
-  secret: your-very-long-and-secure-secret-key-for-jwt-token # 👈 반드시 변경하여 사용
+  secret: my-key # 👈 반드시 변경하여 사용

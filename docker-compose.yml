@@ -1,0 +1,24 @@
+version: '3.8'
+
+services:
+  db:
+    image: mysql:8.0
+    container_name: board_mysql_db
+    restart: always
+    ports:
+      - "3306:3306" # 호스트의 3306 포트를 컨테이너의 3306 포트와 매핑
+    environment:
+      MYSQL_ROOT_PASSWORD: your_root_password # 루트 비밀번호 (실제 환경에서는 더 강력한 비밀번호 사용)
+      MYSQL_DATABASE: board_db # application.yml의 데이터베이스 이름과 일치
+      MYSQL_USER: your_mysql_username # application.yml의 사용자 이름과 일치
+      MYSQL_PASSWORD: your_mysql_password # application.yml의 비밀번호와 일치
+    volumes:
+      - mysql_data:/var/lib/mysql # 데이터 영속성을 위한 볼륨
+    healthcheck:
+      test: ["CMD", "mysqladmin" ,"ping", "-h", "localhost", "-u$$MYSQL_USER", "-p$$MYSQL_PASSWORD"] # $$로 이스케이프
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+volumes:
+  mysql_data: # 명명된 볼륨 정의

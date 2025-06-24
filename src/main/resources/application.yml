@@ -1,0 +1,25 @@
+spring:
+  # --- Database (MySQL) 설정 ---
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/board_db?useSSL=false&serverTimezone=Asia/Seoul&characterEncoding=UTF-8
+    username: your_mysql_username
+    password: your_mysql_password
+
+  # --- JPA & Hibernate 설정 ---
+  jpa:
+    # 서버 실행 시 DDL(테이블) 생성 전략
+    hibernate:
+      ddl-auto: update # 개발 초기: create 또는 update, 운영: validate 또는 none
+    properties:
+      hibernate:
+        # 콘솔에 실행되는 SQL 쿼리 출력
+        show_sql: true
+        # SQL 쿼리를 보기 좋게 포맷팅
+        format_sql: true
+        # 기본 네이밍 전략을 물리적 전략으로 변경하여 snake_case로 적용
+    database-platform: org.hibernate.dialect.MySQL8Dialect
+
+# --- JWT Secret Key ---
+jwt:
+  secret: your-very-long-and-secure-secret-key-for-jwt-token # 👈 반드시 변경하여 사용
